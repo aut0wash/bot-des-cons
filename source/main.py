@@ -12,6 +12,7 @@ authorized_id   = '189489874645155841'
 server_name     = 'Le Discord des Cons'
 bot_channel     = 'logs'
 access_logs     = None
+general         = None
 
 
 class UnAuthorized(Exception):
@@ -37,6 +38,8 @@ async def on_ready():
     print(server_name)
     global access_logs
     access_logs = discord.utils.get(client.get_all_channels(), server__name=server_name, name=bot_channel)
+    global general
+    general = discord.utils.get(client.get_all_channels(), server__name=server_name, name="general")
 
 
 @client.event
@@ -48,7 +51,10 @@ async def on_member_join(member):
 @client.event
 async def on_message(message):
     try:
-        pass
+        check_auth(message)
+        if message.channel.is_private:
+            await client.send_message(general, message.content)
+
     except Exception as e:
         print('Error in on_message: '+str(e))
 
