@@ -9,6 +9,7 @@ import sys
 token           = sys.argv[1]
 client          = discord.Client()
 authorized_id   = '189489874645155841'
+bot_id          = '453117389802831882'
 server_name     = 'Le Discord des Cons'
 bot_channel     = 'logs'
 access_logs     = None
@@ -30,6 +31,8 @@ def get_time():
 
 def check_auth(message):
     if not message.author.id == authorized_id:
+        print(message.author.id)
+        print(message.content)
         raise UnAuthorized('This command requires privileged rights')
 
 
@@ -51,8 +54,9 @@ async def on_member_join(member):
 @client.event
 async def on_message(message):
     try:
-        check_auth(message)
-        if message.channel.is_private:
+        if not message.author.id == bot_id and message.channel.is_private:
+            check_auth(message)
+            print('printing message to general:')
             await client.send_message(general, message.content)
 
     except Exception as e:
