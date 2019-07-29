@@ -9,7 +9,7 @@ import json
 import os
 
 def JSONRequester(URL):
-    r = requests.get(URL)  # <=== Requete URL
+    r = requests.get(URL)
 
     json_data = json.loads(r.text)
     j = json.dumps(json_data, ensure_ascii=False)
@@ -18,8 +18,7 @@ def JSONRequester(URL):
     return JSON
 
 
-import setup as setup #stockage du token
-token = setup.DISCORD_BOT_SECRET
+token = sys.argv[1]
 
 client = discord.Client()
 
@@ -29,10 +28,8 @@ server_name = 'Le Discord des Cons'
 bot_channel = 'logs'
 access_logs = None
 general = None
-postmatch_channel = 'postmatch'
+postmatch_channel = 'post_match'
 postmatch = None
-
-
 
 
 class UnAuthorized(Exception):
@@ -83,7 +80,7 @@ async def on_message(message):
     try:
         if not message.author.id == bot_id and type(message.channel) == discord.channel.DMChannel:
             check_auth(message)
-            print('printing message to général : {}'.format(message.content))
+            print('printing message to general : {}'.format(message.content))
             await general.send(message.content)
 
     except Exception as e:
@@ -164,7 +161,7 @@ async def on_message(message):
             #f=0
     except Exception as e:
         print('Error in on_message: {}'.format(e))
-####
+
     try:
         command = '!my' #my hero
         ms = str.lower(message.content)
@@ -351,7 +348,7 @@ async def on_message(message):
             #f=0
     except Exception as e:
         print('Error in on_message: {}'.format(e))
-####
+
 
 @client.event
 async def on_voice_state_update(member, before, after):
