@@ -8,18 +8,7 @@ import requests
 import json
 import os
 
-def JSONRequester(URL):
-    r = requests.get(URL)  # <=== Requete URL
-
-    json_data = json.loads(r.text)
-    j = json.dumps(json_data, ensure_ascii=False)
-    JSON = json.loads(j)
-
-    return JSON
-
-
-import setup as setup #stockage du token
-token = setup.DISCORD_BOT_SECRET
+token = sys.argv[1]
 
 client = discord.Client()
 
@@ -29,10 +18,18 @@ server_name = 'Le Discord des Cons'
 bot_channel = 'logs'
 access_logs = None
 general = None
-postmatch_channel = 'postmatch'
+postmatch_channel = 'post_match'
 postmatch = None
 
 
+def JSONRequester(URL):
+    r = requests.get(URL)
+
+    json_data = json.loads(r.text)
+    j = json.dumps(json_data, ensure_ascii=False)
+    JSON = json.loads(j)
+
+    return JSON
 
 
 class UnAuthorized(Exception):
@@ -64,6 +61,8 @@ async def on_ready():
         global general
         general = discord.utils.get(
             client.get_all_channels(), guild__name=server_name, name="general")
+        global postmatch
+        postmatch = discord.utils.get(client.get_all_channels(), guild__name=server_name, name=postmatch_channel)
     except Exception as e:
         print('Error in on_ready: {}'.format(e))
 
@@ -83,7 +82,7 @@ async def on_message(message):
     try:
         if not message.author.id == bot_id and type(message.channel) == discord.channel.DMChannel:
             check_auth(message)
-            print('printing message to général : {}'.format(message.content))
+            print('printing message to general : {}'.format(message.content))
             await general.send(message.content)
 
     except Exception as e:
@@ -114,7 +113,7 @@ async def on_message(message):
                                     surnom = ''
                                 else :
                                     surnom = ' AKA {}'.format(str.capitalize(hero_name_input))
-                                await postmach.send('Checking stats for counter {}{}, please wait...'.format(hereos_data[h]["localized_name"], surnom))
+                                await postmatch.send('Checking stats for counter {}{}, please wait...'.format(hereos_data[h]["localized_name"], surnom))
                                 finish = True
                                 break
                                 #sortir de la boucle for i in range(len(hereos_data)) quand le résultat est correct
@@ -157,14 +156,14 @@ async def on_message(message):
                     if hereos_data[h]["id"]==top5counter:
                         top5counter_name = hereos_data[h]["localized_name"]
 
-                await postmach.send('Top counterpicks against {}{} :\n:first_place:- {} \n:second_place:- {} \n:third_place:- {} \n  4   - {} \n  5   - {}'.format(herolocalisedname, surnom, top1counter_name, top2counter_name, top3counter_name, top4counter_name, top5counter_name))
+                await postmatch.send('Top counterpicks against {}{} :\n:first_place:- {} \n:second_place:- {} \n:third_place:- {} \n  4   - {} \n  5   - {}'.format(herolocalisedname, surnom, top1counter_name, top2counter_name, top3counter_name, top4counter_name, top5counter_name))
             except:
-                await postmach.send('Invalid command, please try again : !command')
+                await postmatch.send('Invalid command, please try again : !command')
         #else:
             #f=0
     except Exception as e:
         print('Error in on_message: {}'.format(e))
-####
+
     try:
         command = '!my' #my hero
         ms = str.lower(message.content)
@@ -191,7 +190,7 @@ async def on_message(message):
                                 heroid=hereos_data[h]["id"]
                                 herolocalisedname = hereos_data[h]["localized_name"]
 
-                                await postmach.send('Checking your stats with {}, please wait...'.format(hereos_data[h]["localized_name"]))
+                                await postmatch.send('Checking your stats with {}, please wait...'.format(hereos_data[h]["localized_name"]))
                                 finish = True
                                 break
                                 #sortir de la boucle for i in range(len(hereos_data)) quand le résultat est correct
@@ -201,7 +200,9 @@ async def on_message(message):
                             finish = True
                         if finish == True :
                             break
+                print(steamId, heroid)
                 url = 'https://api.opendota.com/api/players/' + str(steamId) + '/heroes'
+                print(url)
                 opendotaplayersherostats = JSONRequester(url)
                 for hero in range(len(opendotaplayersherostats)) :
                     if opendotaplayersherostats[hero]['hero_id'] == str(heroid):
@@ -223,19 +224,21 @@ async def on_message(message):
                         againstgames = opendotaplayersherostats[hero]['against_games']
                         winagainst = opendotaplayersherostats[hero]['against_win']
                         winrateagainst = round(((winagainst/againstgames) * 100),1)
-
                 url = 'https://api.stratz.com/api/v1/Player/' + str(steamId) + '/heroPerformance/' + str(heroid)
+                print(url)
                 stratzplayersherostats = JSONRequester(url)
                 currentstreak = stratzplayersherostats['streak']
                 maxstreak = stratzplayersherostats['maxStreak']
                 if currentstreak == maxstreak :
-                    com_streak = ':PogChamp:'
-                if maxstreak - currentstreak <=2 and maxstreak > 5:
-                    com_streak = "you're not so far !"
-                if currentstreak ==1:
-                    com_streak = "it's still better than a lose..."
-                if currentstreak ==0:
-                    com_streak = "well, you should maybe change hero..."
+                    com_streak = ' : :PogChamp:'
+                elif maxstreak - currentstreak <=2 and maxstreak > 5:
+                    com_streak = " : you're not so far !"
+                elif currentstreak ==1:
+                    com_streak = " : it's still better than a lose..."
+                elif currentstreak ==0:
+                    com_streak = " : well, you should change hero..."
+                else :
+                    com_streak = "!"
                 avgkills =round(stratzplayersherostats['avgNumKills'],1)
                 maxkills = stratzplayersherostats['maxNumKills']
                 avgdeaths = round(stratzplayersherostats['avgNumDeaths'],1)
@@ -248,11 +251,11 @@ async def on_message(message):
                 maxxpm = round(stratzplayersherostats['maxExperiencePerMinute'])
                 avglh = round(stratzplayersherostats['avgNumLastHits'])
                 maxlh = stratzplayersherostats['maxNumLastHits']
-                await postmach.send('Your statistics with **{}** in **{}** games :\n {}   {}% win\n {} games played with ({}% win)\n {} games played against ({}% win)\n            __Records :__\n      Kills : {} (*{}*)\n      Deaths : {} (*{}*)\n      Assists : {} (*{}*)\n      GPM : {} (*{}*)\n      XPM : {} (*{}*)\n      Last-hits : {} (*{}*)\n\n Your winning streak is {} and your record is {} : {}'.format(herolocalisedname, gamescount, com_win, winrate, withgames, winratewith, againstgames, winrateagainst, avgkills, maxkills, avgdeaths, mindeaths, avgassists, maxassists, avggpm, maxgpm, avgxpm, maxxpm, avglh, maxlh, currentstreak, maxstreak,com_streak))
+                await postmatch.send('Your statistics with **{}** in **{}** games :\n {}   {}% win\n {} games played with ({}% win)\n {} games played against ({}% win)\n            __Records :__\n      Kills : {} (*{}*)\n      Deaths : {} (*{}*)\n      Assists : {} (*{}*)\n      GPM : {} (*{}*)\n      XPM : {} (*{}*)\n      Last-hits : {} (*{}*)\n\n Your winning streak is {} and your record is {} : {}'.format(herolocalisedname, gamescount, com_win, winrate, withgames, winratewith, againstgames, winrateagainst, avgkills, maxkills, avgdeaths, mindeaths, avgassists, maxassists, avggpm, maxgpm, avgxpm, maxxpm, avglh, maxlh, currentstreak, maxstreak,com_streak))
             except:
-                await postmach.send('Invalid command, please try again : !command')
-        #else:
-            #f=0
+                await postmatch.send('Invalid command, please try again : !command')
+        else:
+            f=0
     except Exception as e:
         print('Error in on_message: {}'.format(e))
 
@@ -264,12 +267,14 @@ async def on_message(message):
                 sp_pos1 = ms.find(' ',len(command)-1)
                 sp_pos2 = ms.find(' ',sp_pos1+1)
                 username =  ms[sp_pos1+1:sp_pos2]
+                print(username)
                 with open("bdd.json", "r") as jsonFile:
                     bdd = json.load(jsonFile)
                 for user in bdd:
-                    if bdd[user]['name'] == username :
+                    if str.lower(bdd[user]['name']) == username :
                         discordId = user
                         steamId = bdd[user]["steamId"]
+                print(discordId, steamId)
                 with open("datahero.json", "r") as jsonFile:
                     hereos_data = json.load(jsonFile)
                 tiret_pos1 = ms.find('-',len(command)+len(username)-1)
@@ -287,7 +292,7 @@ async def on_message(message):
                                 heroid=hereos_data[h]["id"]
                                 herolocalisedname = hereos_data[h]["localized_name"]
 
-                                await postmach.send("Checking {}'s stats with {}, please wait...".format(str.capitalize(username), hereos_data[h]["localized_name"]))
+                                await postmatch.send("Checking {}'s stats with {}, please wait...".format(str.capitalize(username), hereos_data[h]["localized_name"]))
                                 finish = True
                                 break
                                 #sortir de la boucle for i in range(len(hereos_data)) quand le résultat est correct
@@ -297,7 +302,9 @@ async def on_message(message):
                             finish = True
                         if finish == True :
                             break
+                print(steamId, heroid)
                 url = 'https://api.opendota.com/api/players/' + str(steamId) + '/heroes'
+                print(url)
                 opendotaplayersherostats = JSONRequester(url)
                 for hero in range(len(opendotaplayersherostats)) :
                     if opendotaplayersherostats[hero]['hero_id'] == str(heroid):
@@ -319,19 +326,23 @@ async def on_message(message):
                         againstgames = opendotaplayersherostats[hero]['against_games']
                         winagainst = opendotaplayersherostats[hero]['against_win']
                         winrateagainst = round(((winagainst/againstgames) * 100),1)
+                print(lastgame, gamescount, winscount, winrate, com_win, withgames, winwith, winratewith, againstgames, winagainst, winrateagainst)
 
                 url = 'https://api.stratz.com/api/v1/Player/' + str(steamId) + '/heroPerformance/' + str(heroid)
+                print(url)
                 stratzplayersherostats = JSONRequester(url)
                 currentstreak = stratzplayersherostats['streak']
                 maxstreak = stratzplayersherostats['maxStreak']
                 if currentstreak == maxstreak :
-                    com_streak = ':PogChamp:'
-                if maxstreak - currentstreak <=2 and maxstreak > 5:
-                    com_streak = "He isn't so far !"
-                if currentstreak ==1:
-                    com_streak = "it's still better than a lose..."
-                if currentstreak ==0:
-                    com_streak = "well, he should maybe change hero..."
+                    com_streak = " : :PogChamp: !"
+                elif maxstreak - currentstreak <=2 and maxstreak > 5:
+                    com_streak = " : He isn't so far !"
+                elif currentstreak ==1:
+                    com_streak = " : it's still better than a lose..."
+                elif currentstreak ==0:
+                    com_streak = " : well, he should maybe change hero..."
+                else :
+                    com_streak = " !"
                 avgkills =round(stratzplayersherostats['avgNumKills'],1)
                 maxkills = stratzplayersherostats['maxNumKills']
                 avgdeaths = round(stratzplayersherostats['avgNumDeaths'],1)
@@ -344,14 +355,14 @@ async def on_message(message):
                 maxxpm = round(stratzplayersherostats['maxExperiencePerMinute'])
                 avglh = round(stratzplayersherostats['avgNumLastHits'])
                 maxlh = stratzplayersherostats['maxNumLastHits']
-                await postmach.send('His statistics with **{}** in **{}** games :\n {}   {}% win\n {} games played with ({}% win)\n {} games played against ({}% win)\n            __Records :__\n      Kills : {} (*{}*)\n      Deaths : {} (*{}*)\n      Assists : {} (*{}*)\n      GPM : {} (*{}*)\n      XPM : {} (*{}*)\n      Last-hits : {} (*{}*)\n\n His winning streak is {} and record is {} : {}'.format(herolocalisedname, gamescount, com_win, winrate, withgames, winratewith, againstgames, winrateagainst, avgkills, maxkills, avgdeaths, mindeaths, avgassists, maxassists, avggpm, maxgpm, avgxpm, maxxpm, avglh, maxlh, currentstreak, maxstreak,com_streak))
+                await postmatch.send('His statistics with **{}** in **{}** games :\n {}   {}% win\n {} games played with ({}% win)\n {} games played against ({}% win)\n            __Records :__\n      Kills : {} (*{}*)\n      Deaths : {} (*{}*)\n      Assists : {} (*{}*)\n      GPM : {} (*{}*)\n      XPM : {} (*{}*)\n      Last-hits : {} (*{}*)\n\n His winning streak is {} and record is {}{}'.format(herolocalisedname, gamescount, com_win, winrate, withgames, winratewith, againstgames, winrateagainst, avgkills, maxkills, avgdeaths, mindeaths, avgassists, maxassists, avggpm, maxgpm, avgxpm, maxxpm, avglh, maxlh, currentstreak, maxstreak,com_streak))
             except:
-                await postmach.send('Invalid command, please try again : !command')
-        #else:
-            #f=0
+                await postmatch.send('Invalid command, please try again : !command')
+        else:
+            f=0
     except Exception as e:
         print('Error in on_message: {}'.format(e))
-####
+
 
 @client.event
 async def on_voice_state_update(member, before, after):
