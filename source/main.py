@@ -8,16 +8,6 @@ import requests
 import json
 import os
 
-def JSONRequester(URL):
-    r = requests.get(URL)
-
-    json_data = json.loads(r.text)
-    j = json.dumps(json_data, ensure_ascii=False)
-    JSON = json.loads(j)
-
-    return JSON
-
-
 token = sys.argv[1]
 
 client = discord.Client()
@@ -30,6 +20,16 @@ access_logs = None
 general = None
 postmatch_channel = 'post_match'
 postmatch = None
+
+
+def JSONRequester(URL):
+    r = requests.get(URL)
+
+    json_data = json.loads(r.text)
+    j = json.dumps(json_data, ensure_ascii=False)
+    JSON = json.loads(j)
+
+    return JSON
 
 
 class UnAuthorized(Exception):
@@ -61,6 +61,8 @@ async def on_ready():
         global general
         general = discord.utils.get(
             client.get_all_channels(), guild__name=server_name, name="general")
+        global postmach
+        postmach = discord.utils.get(client.get_all_channels(), guild__name=server_name, name=postmatch_channel)
     except Exception as e:
         print('Error in on_ready: {}'.format(e))
 
