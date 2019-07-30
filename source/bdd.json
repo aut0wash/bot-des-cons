@@ -2,43 +2,51 @@
   "154428278302703616": {
     "name": "aut0wash",
     "steamId": "138410268",
-    "birthday": "27-11",
     "birthdate": "27-11-1993"
   },
   "189489874645155841": {
     "name": "kuaj",
     "steamId": "87158331",
-    "birthday": "",
     "birthdate": ""
+  },
+  "198719461283463168": {
+    "name": "Rhum",
+    "steamId": "47055391",
+    "birthdate": "04-03-1996"
   },
   "274945909400403988": {
     "name": "Zeppelin",
     "steamId": "258607808",
-    "birthday": "26-07",
     "birthdate": "26-07-1999"
   },
   "277464447344181260": {
     "name": "Hellenouille",
     "steamId": "29371179",
-    "birthday": "29-03",
     "birthdate": "29-03-1987"
   },
   "158993033671606273": {
     "name": "Til30",
     "steamId": "65832676",
-    "birthday": "16-11",
     "birthdate": "16-11-1994"
   },
   "219457679515451393": {
-    "name": "smùdskù",
+    "name": "smudsku",
     "steamId": "107387704",
-    "birthday": "18-01",
     "birthdate": "18-01-1991"
   },
   "243858093186744320": {
     "name": "Llewela",
     "steamId": "251576932",
-    "birthday": "05-04",
     "birthdate": "05-04-1991"
+  },
+  "198849540353163264": {
+    "name": "Ostrane",
+    "steamId": "33191278",
+    "birthdate": "13-01-1994"
+  },
+  "374860924730867713": {
+    "name": "Bigs",
+    "steamId": "132848993",
+    "birthdate": "19-03-1993"
   }
 }

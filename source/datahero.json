@@ -1076,7 +1076,7 @@
     "id": 74,
     "name": "npc_dota_hero_invoker",
     "localized_name": "Invoker",
-    "used_names":["invo", "invoker", "rhum", "rhumdota"],
+    "used_names":["invo", "invoker", "invok", "invoke", "rhum", "rhumdota"],
     "primary_attr": "int",
     "attack_type": "Ranged",
     "roles": [
