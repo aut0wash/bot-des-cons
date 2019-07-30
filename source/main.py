@@ -74,7 +74,7 @@ async def on_message(message):
     try:
         if not message.author.id == bot_id and type(message.channel) == discord.channel.DMChannel:
             check_auth(message)
-            print('printing message to général : {}'.format(message.content))
+            print('printing message to general : {}'.format(message.content))
             await general.send(message.content)
 
     except Exception as e:
