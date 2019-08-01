@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:9
 
 ENTRYPOINT ["/usr/bin/python3.5", "-u", "main.py"]
 
