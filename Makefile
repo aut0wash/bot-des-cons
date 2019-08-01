@@ -7,11 +7,8 @@ default:
 build:
 	docker build -t bot-des-cons:0.1 .
 
-FILE=token.txt
-TOKEN=`cat $(FILE)`
-
 run:
-	docker run -d --name bot-des-cons --restart always bot-des-cons:0.1 $(TOKEN)
+	docker run -d --name bot-des-cons --restart always bot-des-cons:0.1 $(DISCORD_TOKEN) $(LDP_TOKEN)
 
 logs:
 	docker logs -f bot-des-cons
