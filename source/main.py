@@ -32,6 +32,7 @@ def setup_logging():
     handler.setFormatter(LDPGELFFormatter(token=token_ldp))
     logging.getLogger().addHandler(handler)
     logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger('discord').setLevel(logging.WARNING)
 
 
 def JSONRequester(URL):
@@ -66,7 +67,6 @@ def check_auth(message):
 @client.event
 async def on_ready():
     try:
-        logging.info(server_name)
         global access_logs
         access_logs = discord.utils.get(
             client.get_all_channels(), guild__name=server_name, name=bot_channel)
@@ -77,7 +77,7 @@ async def on_ready():
         postmach = discord.utils.get(client.get_all_channels(
         ), guild__name=server_name, name=postmatch_channel)
     except Exception as e:
-        print('Error in on_ready: {}'.format(e))
+        logging.error('Error in on_ready: {}'.format(e))
 
 
 @client.event
@@ -87,7 +87,7 @@ async def on_member_join(member):
             member.server.roles, name="Trou du cul la balayette")
         await client.add_roles(member, role)
     except Exception as e:
-        print('Error in on_member_join: {}'.format(e))
+        logging.error('Error in on_member_join: {}'.format(e))
 
 
 @client.event
@@ -95,11 +95,10 @@ async def on_message(message):
     try:
         if not message.author.id == bot_id and type(message.channel) == discord.channel.DMChannel:
             check_auth(message)
-            print('printing message to general : {}'.format(message.content))
             await general.send(message.content)
 
     except Exception as e:
-        print('Error in on_message: {}'.format(e))
+        loggin.error('Error in on_message: {}'.format(e))
 
     try:
         command = '!counter'
@@ -177,7 +176,7 @@ async def on_message(message):
         # else:
             # f=0
     except Exception as e:
-        print('Error in on_message: {}'.format(e))
+        logging.error('Error in on_message: {}'.format(e))
 
     try:
         command = '!my'  # my hero
@@ -273,7 +272,7 @@ async def on_message(message):
         # else:
             # f=0
     except Exception as e:
-        print('Error in on_message: {}'.format(e))
+        logging.error('Error in on_message: {}'.format(e))
 
     try:
         command = '!his'  # his pseudo - héro
@@ -374,7 +373,7 @@ async def on_message(message):
         # else:
             # f=0
     except Exception as e:
-        print('Error in on_message: {}'.format(e))
+        logging.error('Error in on_message: {}'.format(e))
 
 
 @client.event
@@ -393,16 +392,19 @@ async def on_voice_state_update(member, before, after):
             name = member.name+' aka '+member.display_name
 
         if before_channel is None and after_channel is not None:
-            await access_logs.send('```diff\n+ {} IN  {}\n```'.format(get_time(), name))
+            await access_logs.send(
+                '```diff\n+ {} IN  {}\n```'.format(get_time(), name))
+            logging.info('IN {}'.format(get_time(), name))
         elif after_channel is None and before_channel is not None:
-            await access_logs.send('```diff\n- {} OUT {}\n```'.format(get_time(), name))
+            await access_logs.send(
+                '```diff\n- {} OUT {}\n```'.format(get_time(), name))
+            logging.info('OUT {}'.format(get_time(), name))
     except Exception as e:
-        print('Error in on_voice_state_update: {}'.format(e))
+        logging.error('Error in on_voice_state_update: {}'.format(e))
 
 if __name__ == "__main__":
     try:
         setup_logging()
-        logging.info("Starting bot-des-cons !")
         client.run(token)
     except Exception as e:
-        print('Error in __main__: {}'.format(e))
+        logging.error('Error in __main__: {}'.format(e))
