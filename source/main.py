@@ -394,11 +394,11 @@ async def on_voice_state_update(member, before, after):
         if before_channel is None and after_channel is not None:
             await access_logs.send(
                 '```diff\n+ {} IN  {}\n```'.format(get_time(), name))
-            logging.info('IN {}'.format(get_time(), name))
+            logging.info('IN {}'.format(name))
         elif after_channel is None and before_channel is not None:
             await access_logs.send(
                 '```diff\n- {} OUT {}\n```'.format(get_time(), name))
-            logging.info('OUT {}'.format(get_time(), name))
+            logging.info('OUT {}'.format(name))
     except Exception as e:
         logging.error('Error in on_voice_state_update: {}'.format(e))
 
