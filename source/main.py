@@ -24,6 +24,7 @@ server_name = 'Le Discord des Cons'
 bot_channel = 'logs'
 access_logs = None
 general = None
+default_role = "Trou du cul la balayette"
 
 
 def setup_logging():
@@ -89,13 +90,35 @@ class MetricNewMember(Metric):
     def __init__(self, user_id):
         super().__init__()
         self.user_id = user_id
-        self.metric_name = "discord.events.newmember"
+        self.metric_name = "discord.events.new.member"
 
     def push(self):
         payload = "{}// {}{{user={}}} 1".format(
             self.metric_time,
             self.metric_name,
             self.user_id
+        )
+        logging.info("sending payload {}".format(payload))
+        requests.post(
+            self.url,
+            headers=self.headers,
+            data=payload
+        )
+
+
+class MetricNewMessage(Metric):
+    def __init__(self, user_id, channel):
+        super().__init__()
+        self.user_id = user_id
+        self.channel = channel
+        self.metric_name = "discord.events.new.message"
+
+    def push(self):
+        payload = "{}// {}{{user={},channel={}}} 1".format(
+            self.metric_time,
+            self.metric_name,
+            self.user_id,
+            self.channel
         )
         logging.info("sending payload {}".format(payload))
         requests.post(
@@ -129,7 +152,7 @@ async def on_member_join(member):
     try:
         role = discord.utils.get(
             member.guild.roles,
-            name="Trou du cul la balayette"
+            name=default_role
         )
         await member.add_roles(role)
         MetricConnection(member.id).push()
@@ -144,8 +167,15 @@ async def on_message(message):
         if not message.author.id == bot_id and type(message.channel) == discord.channel.DMChannel:
             check_auth(message)
             await general.send(message.content)
+        if not message.author.id == bot_id and not type(message.channel) == discord.channel.DMChannel:
+            MetricNewMessage(message.author.id, message.channel.name).push()
     except Exception as e:
         loggin.error('Error in on_message: {}'.format(e))
+
+
+@client.event
+async def on_reaction_add(reaction, user):
+    pass
 
 
 @client.event
