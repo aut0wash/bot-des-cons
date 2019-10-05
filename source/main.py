@@ -57,26 +57,24 @@ def check_auth(message):
 
 class Metric:
     def __init__(self):
-        self.url = 'https://warp10.gra1.metrics.ovh.net/api/v0/update'
+        self.url = 'https://warp10.romain-dupont.fr/api/v0/update'
         self.headers = {'X-Warp10-Token': token_mdp,
                         'content-type': 'text/plain'}
         self.metric_time = int(time.time()) * 1000000
 
 
 class MetricConnection(Metric):
-    def __init__(self, user_id, channel_name):
+    def __init__(self, channel_name):
         super().__init__()
-        self.user_id = user_id
         self.channel_name = channel_name
         self.metric_name = "discord.events.connection"
 
     def push(self, direction):
-        payload = "{}// {}{{direction={},channel={},user={}}} 1".format(
+        payload = "{}// {}{{direction={},channel={}}} 1".format(
             self.metric_time,
             self.metric_name,
             direction,
-            self.channel_name,
-            self.user_id
+            self.channel_name        
         )
         logging.info("sending payload {}".format(payload))
         requests.post(
@@ -87,16 +85,14 @@ class MetricConnection(Metric):
 
 
 class MetricNewMember(Metric):
-    def __init__(self, user_id):
+    def __init__(self):
         super().__init__()
-        self.user_id = user_id
         self.metric_name = "discord.events.new.member"
 
     def push(self):
-        payload = "{}// {}{{user={}}} 1".format(
+        payload = "{}// {}{{}} 1".format(
             self.metric_time,
-            self.metric_name,
-            self.user_id
+            self.metric_name
         )
         logging.info("sending payload {}".format(payload))
         requests.post(
@@ -107,17 +103,15 @@ class MetricNewMember(Metric):
 
 
 class MetricNewMessage(Metric):
-    def __init__(self, user_id, channel):
+    def __init__(self, channel):
         super().__init__()
-        self.user_id = user_id
         self.channel = channel
         self.metric_name = "discord.events.new.message"
 
     def push(self):
-        payload = "{}// {}{{user={},channel={}}} 1".format(
+        payload = "{}// {}{{channel={}}} 1".format(
             self.metric_time,
             self.metric_name,
-            self.user_id,
             self.channel
         )
         logging.info("sending payload {}".format(payload))
@@ -155,7 +149,7 @@ async def on_member_join(member):
             name=default_role
         )
         await member.add_roles(role)
-        MetricConnection(member.id).push()
+        MetricNewMember().push()
         logging.info("Added role for new member")
     except Exception as e:
         logging.error('Error in on_member_join: {}'.format(e))
@@ -168,7 +162,7 @@ async def on_message(message):
             check_auth(message)
             await general.send(message.content)
         if not message.author.id == bot_id and not type(message.channel) == discord.channel.DMChannel:
-            MetricNewMessage(message.author.id, message.channel.name).push()
+            MetricNewMessage(message.channel.name).push()
     except Exception as e:
         loggin.error('Error in on_message: {}'.format(e))
 
@@ -196,11 +190,11 @@ async def on_voice_state_update(member, before, after):
         if before_channel is None and after_channel is not None:
             payload = '```diff\n+ {} IN  {}\n```'.format(get_time(), name)
             await access_logs.send(payload)
-            MetricConnection(member.id, after_channel.name).push("in")
+            MetricConnection(after_channel.name).push("in")
         elif after_channel is None and before_channel is not None:
             payload = '```diff\n- {} OUT  {}\n```'.format(get_time(), name)
             await access_logs.send(payload)
-            MetricConnection(member.id, "None").push("out")
+            MetricConnection("None").push("out")
     except Exception as e:
         logging.error('Error in on_voice_state_update: {}'.format(e))
 
