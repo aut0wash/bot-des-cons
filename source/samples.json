@@ -1,0 +1,51 @@
+{
+    "1" : {
+        "path": "bane.mp3",
+        "name": "bane",
+        "users": [],
+        "volume": 10,
+        "tags": {}
+    },
+    "2" : {
+        "path": "invoker.mp3",
+        "name": "invoker",
+        "users": [],
+        "volume": 10,
+        "tags": {}
+    },
+    "3" : {
+        "path": "jglaugh.mp3",
+        "name": "jglaugh",
+        "users": [],
+        "volume": 256,
+        "tags": {}
+    },
+    "4" : {
+        "path": "lich.mp3",
+        "name": "lich",
+        "users": [],
+        "volume": 10,
+        "tags": {}
+    },
+    "5" : {
+        "path": "meepo.mp3",
+        "name": "meepo",
+        "users": [],
+        "volume": 10,
+        "tags": {}
+    },
+    "6" : {
+        "path": "silence.mp3",
+        "name": "silence",
+        "users": [],
+        "volume": 10,
+        "tags": {}
+    },
+    "7" : {
+        "path": "witch_doctor.mp3",
+        "name": "witch doctor",
+        "users": [],
+        "volume": 10,
+        "tags": {}
+    }
+}
