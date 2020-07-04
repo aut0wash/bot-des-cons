@@ -21,8 +21,8 @@ default_role = "Trou du cul la balayette"
 
 
 def setup_logging():
-    logging.getLogger().setLevel(logging.INFO)
     logging.getLogger('discord').setLevel(logging.WARNING)
+    logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s')
 
 
 class UnAuthorized(Exception):

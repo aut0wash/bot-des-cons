@@ -1,4 +1,5 @@
 import json
+import logging
 
 
 class AudioSample:
@@ -14,7 +15,8 @@ class AudioSample:
         return cls(data["name"], data["path"], data["tags"], data["users"], data["volume"])
 
     def print(self):
-        print(f"Name: {self.name}, path: {self.path}, tags: {self.tags}, users: {self.users}, volume: {self.volume}")
+        logging.info(f"Name: {self.name}, path: {self.path}, tags: {self.tags}, users: {self.users}, volume: {self.volume}")
+
 
 def load_json(path):
     with open(path) as json_file:
@@ -26,7 +28,9 @@ def get_sample_from_id(samples, sample_id):
     try:
         return AudioSample.from_dict(samples[str(sample_id)])
     except Exception as e:
+        logging.error('Error in get_sample_from_id: {}'.format(e))
         return None
+
 
 def get_sample_from_name(samples, sample_name):
     try:
@@ -34,7 +38,9 @@ def get_sample_from_name(samples, sample_name):
             if samples[sample]["name"] == sample_name:
                 return AudioSample.from_dict(samples[sample])
     except Exception as e:
+        logging.error('Error in get_sample_from_name: {}'.format(e))
         return None
+
 
 if __name__ == "__main__":
     samples = load_json("samples.json")
