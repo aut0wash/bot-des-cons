@@ -79,6 +79,12 @@ async def on_message(message):
                 if connected:
                     vc = await connected.channel.connect()
                     test = vc.play(discord.FFmpegPCMAudio(f"/root/discord/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
+
+                    sample["num_played"] += 1
+                    samples = open("samples.json", "w")
+                    json.dump(sample, samples)
+                    samples.close()
+
                     while vc.is_playing():
                         await asyncio.sleep(1)
                     await vc.disconnect()
