@@ -10,10 +10,11 @@ import utils
 
 auto_id = 154428278302703616
 kuaj_id = 189489874645155841
+mob_id = 198530702558494720
 
 bot_ids = [728962844158328883, 453117389802831882]
 
-authorized_ids = [auto_id, kuaj_id]
+authorized_ids = [auto_id, kuaj_id, mob_id]
 
 token = sys.argv[1]
 client = discord.Client()
