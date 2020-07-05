@@ -11,6 +11,8 @@ import utils
 auto_id = 154428278302703616
 kuaj_id = 189489874645155841
 
+bot_ids = [728962844158328883, 453117389802831882]
+
 authorized_ids = [auto_id, kuaj_id]
 
 token = sys.argv[1]
@@ -22,7 +24,16 @@ default_role = "Trou du cul la balayette"
 
 def setup_logging():
     logging.getLogger('discord').setLevel(logging.WARNING)
-    logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s')
+
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    root.addHandler(handler)
 
 
 class UnAuthorized(Exception):
@@ -67,8 +78,8 @@ async def on_member_join(member):
 @client.event
 async def on_message(message):
     try:
-        print('Message from {0.author}: {0.content}'.format(message))
-        if type(message.channel) == discord.channel.DMChannel:
+        logging.info('Message from {0.author}: {0.content}'.format(message))
+        if type(message.channel) == discord.channel.DMChannel and message.author.id not in bot_ids:
             check_auth(message)
 
             sample = utils.get_sample_from_name(
@@ -78,17 +89,17 @@ async def on_message(message):
                 connected = member.voice
                 if connected:
                     vc = await connected.channel.connect()
-                    test = vc.play(discord.FFmpegPCMAudio(f"/root/discord/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
-
-                    sample["num_played"] += 1
-                    samples = open("samples.json", "w")
-                    json.dump(sample, samples)
-                    samples.close()
+                    vc.play(discord.FFmpegPCMAudio(f"/root/discord/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
 
                     while vc.is_playing():
-                        await asyncio.sleep(1)
+                        await asyncio.sleep(0.5)
                     await vc.disconnect()
 
+            if message.content == "help":
+                command_list = []
+                for sample in client.samples:
+                    command_list.append(client.samples[sample]["name"])
+                await message.channel.send(command_list)
     except Exception as e:
         logging.error('Error in on_message: {}'.format(e))
 

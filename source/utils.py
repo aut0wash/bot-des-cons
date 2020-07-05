@@ -3,20 +3,19 @@ import logging
 
 
 class AudioSample:
-    def __init__(self, name, path, tags, users, volume, num_played):
+    def __init__(self, name, path, tags, users, volume):
         self.name = name
         self.path = path
         self.tags = tags
         self.users = users
         self.volume = volume
-        self.num_played = num_played
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["name"], data["path"], data["tags"], data["users"], data["volume"], data["num_played"])
+        return cls(data["name"], data["path"], data["tags"], data["users"], data["volume"])
 
     def print(self):
-        logging.info(f"Name: {self.name}, path: {self.path}, tags: {self.tags}, users: {self.users}, volume: {self.volume}, played: {self.num_played}")
+        logging.info(f"Name: {self.name}, path: {self.path}, tags: {self.tags}, users: {self.users}, volume: {self.volume}")
 
 
 def load_json(path):
