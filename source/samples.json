@@ -2,50 +2,145 @@
     "1" : {
         "path": "bane.mp3",
         "name": "bane",
-        "users": [],
+        "users": [189489874645155841],
         "volume": 10,
-        "tags": {}
+        "tags": ["dota", "bane", "kuaj"],
+        "num_played" : 0
     },
     "2" : {
         "path": "invoker.mp3",
         "name": "invoker",
-        "users": [],
+        "users": [198719461283463168],
         "volume": 10,
-        "tags": {}
+        "tags": ["dota", "invoker", "rhum_dota"],
+        "num_played" : 0
     },
     "3" : {
         "path": "jglaugh.mp3",
         "name": "jglaugh",
-        "users": [],
+        "users": [198530702558494720],
         "volume": 256,
-        "tags": {}
+        "tags": ["jurassic_park", "mob_borane"],
+        "num_played" : 0
     },
     "4" : {
         "path": "lich.mp3",
         "name": "lich",
-        "users": [],
+        "users": [198530702558494720],
         "volume": 10,
-        "tags": {}
+        "tags": ["dota", "lich", "mob_borane"],
+        "num_played" : 0
     },
     "5" : {
         "path": "meepo.mp3",
         "name": "meepo",
-        "users": [],
+        "users": [198553764792238080],
         "volume": 10,
-        "tags": {}
+        "tags": ["dota", "meepo", "bubz"],
+        "num_played" : 0
     },
     "6" : {
         "path": "silence.mp3",
         "name": "silence",
         "users": [],
         "volume": 10,
-        "tags": {}
+        "tags": ["dota", "puck", "silence"],
+        "num_played" : 0
     },
     "7" : {
         "path": "witch_doctor.mp3",
         "name": "witch doctor",
-        "users": [],
+        "users": [154428278302703616],
         "volume": 10,
-        "tags": {}
+        "tags": ["dota", "witch_doctor", "taunt"],
+        "num_played" : 0
+    },
+    "8" : {
+        "path": "bubz_sauver_texto.mp3",
+        "name": "bubz sauver texto",
+        "users": [198553764792238080],
+        "volume": 10,
+        "tags": ["dota", "bubz", "afk", "sexto"],
+        "num_played" : 0
+    },
+    "9" : {
+        "path": "edaic_afk_teamfight.mp3",
+        "name": "edaic afk teamfight",
+        "users": [198682994565709824],
+        "volume": 10,
+        "tags": ["dota", "edaic", "afk", "teamfight"],
+        "num_played" : 0
+    },
+    "10" : {
+        "path": "kaoru_fail_rp_stream.mp3",
+        "name": "kaoru fail RP",
+        "users": [117404309146173447],
+        "volume": 10,
+        "tags": ["dota", "kaoru", "fail", "RP"],
+        "num_played" : 0
+    },
+    "11" : {
+        "path": "llewela_top_mmr.mp3",
+        "name": "llewela top mmr femme",
+        "users": [243858093186744320],
+        "volume": 10,
+        "tags": ["llewela", "top_mmr"],
+        "num_played" : 0
+    },
+    "12" : {
+        "path": "marik_completement_retard.mp3",
+        "name": "marik completement retard",
+        "users": [198556491341496340],
+        "volume": 10,
+        "tags": ["dota", "marik", "retard", "brain_fart"],
+        "num_played" : 0
+    },
+    "13" : {
+        "path": "marik_wrong_camera.mp3",
+        "name": "marik bain wrong camera",
+        "users": [198556491341496340],
+        "volume": 10,
+        "tags": ["marik", "bain", "camera", "nude"],
+        "num_played" : 0
+    },
+    "14" : {
+        "path": "mobborane_rhumdota_retourner_maman.mp3",
+        "name": "rhumdota savage maman",
+        "users": [198719461283463168, 198530702558494720],
+        "volume": 10,
+        "tags": ["rhum_dota", "mob_borane", "trash_talk", "maman"],
+        "num_played" : 0
+    },
+    "15" : {
+        "path": "rhumdoto_peugeot206.mp3",
+        "name": "rhumdota trash peugeot206",
+        "users": [198719461283463168],
+        "volume": 10,
+        "tags": ["rhum_dota", "peugeot206", "trash_talk"],
+        "num_played" : 0
+    },
+    "16" : {
+        "path": "smudsku_inviter_guilde.mp3",
+        "name": "smudsku con inviter guilde",
+        "users": [219457679515451393],
+        "volume": 10,
+        "tags": ["dota", "smudsku", "trash_talk"],
+        "num_played" : 0
+    },
+    "17" : {
+        "path": "smudsku_pose_radiance.mp3",
+        "name": "smudsku drop radiance",
+        "users": [219457679515451393],
+        "volume": 10,
+        "tags": ["dota", "smudsku", "drop_item", "radiance"],
+        "num_played" : 0
+    },
+    "18" : {
+        "path": "smudsku_sacre_cerveau.mp3",
+        "name": "smudsku sacre cerveau",
+        "users": [219457679515451393],
+        "volume": 10,
+        "tags": ["smudsku", "kendall", "cerveau", "youyou"],
+        "num_played" : 0
     }
 }
