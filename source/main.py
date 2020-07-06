@@ -18,7 +18,7 @@ bot_ids = [728962844158328883, 453117389802831882]
 
 authorized_ids = [auto_id, kuaj_id, mob_id]
 
-token = sys.argv[1]
+token = "NzI4OTYyODQ0MTU4MzI4ODgz.XwCBtw.Uwceo12AGxseDwVfjpSYn7voiTY"
 
 description = 'Soundboard des Cons'
 client = commands.Bot(command_prefix='!', description=description)
