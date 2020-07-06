@@ -1,4 +1,6 @@
 import discord
+from discord.ext import commands, tasks
+
 import asyncio
 import time
 import datetime
@@ -17,7 +19,9 @@ bot_ids = [728962844158328883, 453117389802831882]
 authorized_ids = [auto_id, kuaj_id, mob_id]
 
 token = sys.argv[1]
-client = discord.Client()
+
+description = 'Soundboard des Cons'
+client = commands.Bot(command_prefix='!', description=description)
 
 server_name = 'Le Discord des Cons'
 default_role = "Trou du cul la balayette"
@@ -50,6 +54,10 @@ def check_auth(message):
         logging.warning(f"{message.author.id} - {message.author.name} has tried a command with insufficient permissions")
         raise UnAuthorized('This command requires privileged rights')
 
+def is_admin():
+    def predicate(ctx):
+        return ctx.message.author.id in authorized_ids
+    return commands.check(predicate)
 
 @client.event
 async def on_ready():
@@ -77,35 +85,6 @@ async def on_member_join(member):
 
 
 @client.event
-async def on_message(message):
-    try:
-        logging.info('Message from {0.author}: {0.content}'.format(message))
-        if type(message.channel) == discord.channel.DMChannel and message.author.id not in bot_ids:
-            check_auth(message)
-
-            sample = utils.get_sample_from_name(
-                client.samples, message.content)
-            if sample:
-                member = client.guild.get_member(message.author.id)
-                connected = member.voice
-                if connected:
-                    vc = await connected.channel.connect()
-                    vc.play(discord.FFmpegPCMAudio(f"/root/discord/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
-
-                    while vc.is_playing():
-                        await asyncio.sleep(0.5)
-                    await vc.disconnect()
-
-            if message.content == "help":
-                command_list = []
-                for sample in client.samples:
-                    command_list.append(client.samples[sample]["name"])
-                await message.channel.send(command_list)
-    except Exception as e:
-        logging.error('Error in on_message: {}'.format(e))
-
-
-@client.event
 async def on_reaction_add(reaction, user):
     try:
         pass
@@ -123,6 +102,9 @@ async def on_voice_state_update(member, before, after):
 if __name__ == "__main__":
     try:
         setup_logging()
+        for filename in os.listdir('./cogs'):
+            if filename.endswith('.py'):
+                client.load_extension(f'cogs.{filename[:-3]}')
         client.run(token)
     except Exception as e:
         logging.error('Error in __main__: {}'.format(e))
