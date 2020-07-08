@@ -1,7 +1,6 @@
 import json
 import logging
 
-
 class AudioSample:
     def __init__(self, name, path, tags, users, volume):
         self.name = name
@@ -12,7 +11,7 @@ class AudioSample:
 
     @classmethod
     def from_dict(cls, data):
-        return cls(data["name"], data["path"], data["tags"], data["users"], data["volume"])
+        return cls(data["path"].split(".")[0], data["path"], data["tags"], data["users"], data["volume"])
 
     def print(self):
         logging.info(f"Name: {self.name}, path: {self.path}, tags: {self.tags}, users: {self.users}, volume: {self.volume}")
@@ -39,6 +38,22 @@ def get_sample_from_name(samples, sample_name):
                 return AudioSample.from_dict(samples[sample])
     except Exception as e:
         logging.error('Error in get_sample_from_name: {}'.format(e))
+        return None
+
+
+
+
+def get_sample_from_tags(samples, tags):
+    try:
+        result =  {}
+        for sample in samples:
+            if tags in samples[sample]["tags"]:
+                result[sample] = samples[sample]
+        return result
+
+                    #return AudioSample.from_dict(samples[sample])
+    except Exception as e:
+        logging.error('Error in get_sample_from_tags: {}'.format(e))
         return None
 
 

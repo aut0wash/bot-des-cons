@@ -18,7 +18,7 @@ bot_ids = [728962844158328883, 453117389802831882]
 
 authorized_ids = [auto_id, kuaj_id, mob_id]
 
-token = "NzI4OTYyODQ0MTU4MzI4ODgz.XwCBtw.Uwceo12AGxseDwVfjpSYn7voiTY"
+token = sys.argv[1]
 
 description = 'Soundboard des Cons'
 client = commands.Bot(command_prefix='!', description=description)
@@ -54,10 +54,12 @@ def check_auth(message):
         logging.warning(f"{message.author.id} - {message.author.name} has tried a command with insufficient permissions")
         raise UnAuthorized('This command requires privileged rights')
 
+
 def is_admin():
     def predicate(ctx):
         return ctx.message.author.id in authorized_ids
     return commands.check(predicate)
+
 
 @client.event
 async def on_ready():

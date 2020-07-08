@@ -1,142 +1,134 @@
 {
     "1" : {
         "path": "bane.mp3",
-        "name": "bane",
         "users": [189489874645155841],
         "volume": 10,
         "tags": ["dota", "bane", "kuaj"]
     },
     "2" : {
         "path": "invoker.mp3",
-        "name": "invoker",
         "users": [198719461283463168],
         "volume": 10,
         "tags": ["dota", "invoker", "rhum_dota"]
     },
     "3" : {
         "path": "jglaugh.mp3",
-        "name": "jglaugh",
         "users": [198530702558494720],
         "volume": 256,
         "tags": ["jurassic_park", "mob_borane"]
     },
     "4" : {
         "path": "lich.mp3",
-        "name": "lich",
         "users": [198530702558494720],
         "volume": 10,
         "tags": ["dota", "lich", "mob_borane"]
     },
     "5" : {
         "path": "meepo.mp3",
-        "name": "meepo",
         "users": [198553764792238080],
         "volume": 100,
         "tags": ["dota", "meepo", "bubz"]
     },
     "6" : {
         "path": "silence.mp3",
-        "name": "silence",
         "users": [],
         "volume": 256,
         "tags": ["dota", "puck", "silence"]
     },
     "7" : {
         "path": "witch_doctor.mp3",
-        "name": "witch doctor",
         "users": [154428278302703616],
         "volume": 256,
         "tags": ["dota", "witch_doctor", "taunt"]
     },
     "8" : {
         "path": "bubz_sauver_texto.mp3",
-        "name": "bubz sauver texto",
         "users": [198553764792238080],
         "volume": 150,
         "tags": ["dota", "bubz", "afk", "sexto"]
     },
     "9" : {
         "path": "edaic_afk_teamfight.mp3",
-        "name": "edaic afk teamfight",
         "users": [198682994565709824],
         "volume": 200,
         "tags": ["dota", "edaic", "afk", "teamfight"]
     },
     "10" : {
         "path": "kaoru_fail_rp_stream.mp3",
-        "name": "kaoru fail RP",
         "users": [117404309146173447],
         "volume": 256,
         "tags": ["dota", "kaoru", "fail", "RP"]
     },
     "11" : {
         "path": "llewela_top_mmr.mp3",
-        "name": "llewela top mmr femme",
         "users": [243858093186744320],
         "volume": 256,
         "tags": ["llewela", "top_mmr"]
     },
     "12" : {
         "path": "marik_completement_retard.mp3",
-        "name": "marik completement retard",
         "users": [198556491341496340],
         "volume": 150,
         "tags": ["dota", "marik", "retard", "brain_fart"]
     },
     "13" : {
         "path": "marik_wrong_camera.mp3",
-        "name": "marik bain wrong camera",
         "users": [198556491341496340],
         "volume": 256,
         "tags": ["marik", "bain", "camera", "nude"]
     },
     "14" : {
         "path": "mobborane_rhumdota_retourner_maman.mp3",
-        "name": "rhumdota savage maman",
         "users": [198719461283463168, 198530702558494720],
         "volume": 256,
         "tags": ["rhum_dota", "mob_borane", "trash_talk", "maman"]
     },
     "15" : {
         "path": "rhumdoto_peugeot206.mp3",
-        "name": "rhumdota trash peugeot206",
         "users": [198719461283463168],
         "volume": 200,
         "tags": ["rhum_dota", "peugeot206", "trash_talk"]
     },
     "16" : {
         "path": "smudsku_inviter_guilde.mp3",
-        "name": "smudsku con inviter guilde",
         "users": [219457679515451393],
         "volume": 256,
         "tags": ["dota", "smudsku", "trash_talk"]
     },
     "17" : {
         "path": "smudsku_pose_radiance.mp3",
-        "name": "smudsku drop radiance",
         "users": [219457679515451393],
         "volume": 256,
         "tags": ["dota", "smudsku", "drop_item", "radiance"]
     },
     "18" : {
         "path": "smudsku_sacre_cerveau.mp3",
-        "name": "smudsku sacre cerveau",
         "users": [219457679515451393],
         "volume": 256,
         "tags": ["smudsku", "kendall", "cerveau", "youyou"]
     },
     "19" : {
         "path": "edaic_faut_vraiment_tout_faire.mp3",
-        "name": "edaic faut vraiment tout faire",
-        "users": [],
+        "users": [198682994565709824],
         "volume": 256,
-        "tags": []
+        "tags": ["edaic", "taunt"]
     },
     "20" : {
         "path": "ostrane_piano_invoker_meepo.mp3",
-        "name": "ostrane piano invoker meepo",
         "users": [198849540353163264],
         "volume": 256,
         "tags": ["ostrane", "piano"]
+    },
+    "21" : {
+        "path": "ostrane_focus_rax.mp3",
+        "users": [198849540353163264],
+        "volume": 256,
+        "tags": ["ostrane", "highground"]
+    },
+    "22" : {
+        "path": "ostrane_omfg.mp3",
+        "users": [198849540353163264],
+        "volume": 256,
+        "tags": ["ostrane", "omfg"]
     }
 }
