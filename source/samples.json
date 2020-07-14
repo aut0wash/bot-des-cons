@@ -130,5 +130,17 @@
         "users": [198849540353163264],
         "volume": 256,
         "tags": ["ostrane", "omfg"]
+    },
+    "23" : {
+        "path": "rhumdoto_acheter_banane.mp3",
+        "users": [198719461283463168],
+        "volume": 256,
+        "tags": ["rhum_dota", "banane", "course"]
+    },
+    "24" : {
+        "path": "batman_I_was_wondering.mp3",
+        "users": [],
+        "volume": 150,
+        "tags": ["batman", "bane", "wondering", "spirit", "body"]
     }
 }

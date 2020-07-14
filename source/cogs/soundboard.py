@@ -3,6 +3,9 @@ from discord.ext import commands, tasks
 import asyncio
 import logging
 import random
+from pathlib import Path
+import os.path
+
 import utils
 from main import is_admin
 
@@ -10,6 +13,8 @@ from main import is_admin
 class Soundboard(commands.Cog):
     def __init__(self, client):
         self.client = client
+        self.folder_root = Path().absolute()
+        self.audio_folder = os.path.join(os.path.dirname(self.folder_root), "audios")
 
     @commands.command(aliases=['sound', 's'])
     @is_admin()
@@ -32,7 +37,7 @@ class Soundboard(commands.Cog):
             connected = member.voice
             if connected:
                 vc = await connected.channel.connect()
-                vc.play(discord.FFmpegPCMAudio(f"/root/discord/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
+                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
 
                 while vc.is_playing():
                     await asyncio.sleep(0.5)
@@ -56,7 +61,7 @@ class Soundboard(commands.Cog):
             connected = member.voice
             if connected:
                 vc = await connected.channel.connect()
-                vc.play(discord.FFmpegPCMAudio(f"/root/discord/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
+                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
 
                 while vc.is_playing():
                     await asyncio.sleep(0.5)
