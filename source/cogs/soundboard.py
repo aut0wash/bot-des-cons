@@ -106,7 +106,7 @@ class Soundboard(commands.Cog):
         new_samples_dict = ctx.message.attachments[0]
 
         if new_samples_dict.filename == "samples.json":
-            await new_samples_dict.save(fp=os.path.join(os.path.dirname(self.folder_root), "audios", new_samples_dict.filename))
+            await new_samples_dict.save(fp=os.path.join(os.path.dirname(self.folder_root), "source", new_samples_dict.filename))
             await ctx.send(f":white_check_mark: {new_samples_dict.filename} mis à jour avec succès!")
             self.client.samples = utils.load_json("samples.json")
 
