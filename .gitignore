@@ -3,5 +3,8 @@ dev.env
 .vscode
 .venv
 source/setup.py
+
 source/__pycache__/
 source/cogs/__pycache__/
+*.pyc
+source/secret.py

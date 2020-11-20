@@ -142,5 +142,131 @@
         "users": [],
         "volume": 150,
         "tags": ["batman", "bane", "wondering", "spirit", "body"]
+    },
+    "25" : {
+        "path": "rhum_eau.mp3",
+        "users": [],
+        "volume": 150,
+        "tags": ["rhum", "eau", "water"]
+    },
+    "26" : {
+        "path": "kuaj_pas_bonne_idee_tes_con.mp3",
+        "users": [189489874645155841],
+        "volume": 150,
+        "tags": ["kuaj", "con"]
+    },
+    "27" : {
+        "path": "ostrane_sous_lit.mp3",
+        "users": [198849540353163264],
+        "volume": 200,
+        "tags": ["ostrane", "sous", "lit"]
+    },
+    "28" : {
+        "path": "rhum_cul_kuaj.mp3",
+        "users": [189489874645155841, 198719461283463168],
+        "volume": 150,
+        "tags": ["kuaj", "rhum", "cul"]
+    },
+    "29" : {
+        "path": "rhum_chrono_chrono.mp3",
+        "users": [198719461283463168],
+        "volume": 150,
+        "tags": ["rhum", "chrono"]
+    },
+    "30" : {
+        "path": "snooze_intention_bonne.mp3",
+        "users": [190134885455888384],
+        "volume": 150,
+        "tags": ["snooze", "intention", "bonne"]
+    },
+    "31" : {
+        "path": "magmalengar_saucisson_main.mp3",
+        "users": [198719461283463168],
+        "volume": 150,
+        "tags": ["alex", "saucisson", "main", "rhum", "savage"]
+    },
+    "32" : {
+        "path": "kuaj_bubz_winrate_negatif.mp3",
+        "users": [189489874645155841, 198553764792238080],
+        "volume": 150,
+        "tags": ["kuaj", "bubz", "winrate", "negatif"]
+    },
+    "33" : {
+        "path": "marik_secouer_partout_pantalon.mp3",
+        "users": [198556491341496340, 198530702558494720],
+        "volume": 150,
+        "tags": ["marik", "secouer", "partout", "pantalon", "mob_borane"]
+    },
+    "34" : {
+        "path": "rhum_putain_blague.mp3",
+        "users": [198719461283463168],
+        "volume": 150,
+        "tags": ["rhum", "putain", "blague"]
+    },
+    "35" : {
+        "path": "rhum_ostrane_pas_assez_solide.mp3",
+        "users": [198719461283463168, 198849540353163264],
+        "volume": 150,
+        "tags": ["rhum", "ostrane", "pas", "assez", "solide"]
+    },
+    "36" : {
+        "path": "riddell_cest_parceque_tes_pas_ouf.mp3",
+        "users": [121693699317956609],
+        "volume": 150,
+        "tags": ["riddell", "parceque", "pas", "ouf"]
+    },
+    "37" : {
+        "path": "kuaj_aut0_io_peter_plomb_relocate.mp3",
+        "users": [189489874645155841, 154428278302703616],
+        "volume": 150,
+        "tags": ["kuaj", "aut0wash", "io", "relocate", "trigger"]
+    },
+    "38" : {
+        "path": "mobborane_jour_nuit_fdp.mp3",
+        "users": [198530702558494720],
+        "volume": 150,
+        "tags": ["mob_borane", "jour", "nuit", "fdp"]
+    },
+    "39" : {
+        "path": "aut0wash_reussi_jouer_io.mp3",
+        "users": [154428278302703616],
+        "volume": 150,
+        "tags": ["aut0wash", "io", "jouer", "réussi", "god"]
+    },
+    "40" : {
+        "path": "mickey_10h53.mp3",
+        "users": [199806633491169280],
+        "volume": 150,
+        "tags": ["Val", "mickey", "heure", "montre"]
+    },
+    "41" : {
+        "path": "keepclam_tes_a_chier_bigs.mp3",
+        "users": [206814479432810496, 374860924730867713],
+        "volume": 150,
+        "tags": ["keepcalm", "bigs", "chier"]
+    },
+    "42" : {
+        "path": "marik_ca_sent_le_ramequin.mp3",
+        "users": [198556491341496340],
+        "volume": 150,
+        "tags": ["marik", "ramequin"]
+    },
+    "43" : {
+        "path": "marik_brosser_rei_partout_queue.mp3",
+        "users": [198556491341496340],
+        "volume": 150,
+        "tags": ["marik", "brosser", "queue", "rain"]
+    },
+    "44" : {
+        "path": "bubz_gang_mid.mp3",
+        "users": [198553764792238080],
+        "volume": 150,
+        "tags": ["bubz", "gang", "mid", "hoyhoyhoy"]
+    },
+    "45" : {
+        "path": "bubz_samuser_dota.mp3",
+        "users": [198553764792238080],
+        "volume": 150,
+        "tags": ["bubz", "samuser", "dota"]
     }
 }
