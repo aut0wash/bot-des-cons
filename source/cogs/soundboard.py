@@ -19,7 +19,7 @@ class Soundboard(commands.Cog):
         self.source_folder = f"{Path().absolute()}/source"
 
 
-    @commands.command(aliases=['sound', 's'], brief="joue un record dans ton channel.", help="!sound <12> pour jouer le son n°12 !")
+    @commands.command(aliases=['sound', 's'], brief="joue un record dans ton channel.", help="!sound 12 pour jouer le son n°12 !")
     @commands.dm_only()
     @commands.cooldown(3, 60, type=commands.BucketType.user)
     @commands.max_concurrency(1, per=commands.BucketType.guild, wait=True)
@@ -40,6 +40,7 @@ class Soundboard(commands.Cog):
             connected = member.voice
             if connected:
                 vc = await connected.channel.connect()
+                print(f"{self.audio_folder}/{sample.path}")
                 vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
 
                 while vc.is_playing():
