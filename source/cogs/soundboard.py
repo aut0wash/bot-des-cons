@@ -126,6 +126,14 @@ class Soundboard(commands.Cog):
         await ctx.send("Voilà l'index actuel tas d'cons.", file=index_file)
 
 
+    @commands.command(aliases=['kick'], brief="Commande pour forcer la deconnexion du bot.")
+    @is_admin()
+    @commands.dm_only()
+    async def get_out(self, ctx):
+        logging.info(f"Command get_out from {ctx.message.author.display_name}")
+        for connection in self.client.voice_clients:
+            if connection.guild.id == 198534713575473152:
+                await connection.disconnect()
 
 
 
