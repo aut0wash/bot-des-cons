@@ -78,6 +78,7 @@ async def on_ready():
 
         client.samples = utils.load_json("samples.json")
         logging.info("Ready !")
+        await client.change_presence(status=discord.Status.online, activity=discord.Game('!soundboard'))
     except Exception as e:
         logging.error('Error in on_ready: {}'.format(e))
 

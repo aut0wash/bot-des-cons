@@ -16,7 +16,7 @@ class Soundboard(commands.Cog):
         self.client = client
         self.folder_root = Path().absolute()
         self.audio_folder = os.path.join(os.path.dirname(self.folder_root), "audios")
-    @commands.command(aliases=['sound', 's'])
+    @commands.command(aliases=['sound', 's'], brief="joue un record dans ton channel.", help="!sound <12> pour jouer le son n°12 !")
     @commands.dm_only()
     @commands.cooldown(3, 60, type=commands.BucketType.user)
     @commands.max_concurrency(1, per=commands.BucketType.guild, wait=True)
@@ -43,7 +43,7 @@ class Soundboard(commands.Cog):
                     await asyncio.sleep(0.5)
                 await vc.disconnect()
 
-    @commands.command(aliases=['rd', 'rand'])
+    @commands.command(aliases=['rd', 'rand'], brief="joue un son random dans ton channel.", help="!rand pour jouer un son random parmi la bibliothèque !")
     @commands.dm_only()
     @commands.cooldown(3, 60, type=commands.BucketType.user)
     @commands.max_concurrency(1, per=commands.BucketType.guild, wait=True)
@@ -67,7 +67,7 @@ class Soundboard(commands.Cog):
                     await asyncio.sleep(0.5)
                 await vc.disconnect()
 
-    @commands.command(aliases=['list', 'l'])
+    @commands.command(aliases=['list', 'l'], brief="Renvoie le catalogue complet des sons disponibles.", help='!list pour avoir la liste des sons enregistrés.')
     @commands.dm_only()
     async def soundlist(self, ctx, tags=None):
         self.client.samples = utils.load_json("samples.json")
@@ -85,10 +85,10 @@ class Soundboard(commands.Cog):
 
         await ctx.send("Voici la liste des sons disponibles:\n```css\n{}```".format('\n'.join(command_list)))
 
-    @commands.command(aliases=['add_sound', 'add'])
+    @commands.command(aliases=['add_sound', 'add'], brief="Commande pour ajouter un nouveau record dans la biblothèque! Admin only.")
     @is_admin()
     @commands.dm_only()
-    async def addsound(self, ctx, tags=None):
+    async def addsound(self, ctx):
         logging.info(f"Command addsound from {ctx.message.author.display_name}")
         new_sound = ctx.message.attachments[0]
         extension = os.path.splitext(new_sound.filename)[1]
@@ -98,10 +98,10 @@ class Soundboard(commands.Cog):
         else:
             await ctx.send(f":negative_squared_cross_mark: Fichier {new_sound.filename} ne semble pas être dans le bon format (.mp3 uniquement).")
 
-    @commands.command(aliases=['update', 'updatejson'])
+    @commands.command(aliases=['update', 'updatejson'], brief="Commande pour mettre à jour l'index de la bibliothèque. Admin only.")
     @is_admin()
     @commands.dm_only()
-    async def update_bibliotheque(self, ctx, tags=None):
+    async def update_bibliotheque(self, ctx):
         logging.info(f"Command update_bibliotheque from {ctx.message.author.display_name}")
         new_samples_dict = ctx.message.attachments[0]
 
@@ -112,6 +112,16 @@ class Soundboard(commands.Cog):
 
         else:
             await ctx.send(f":negative_squared_cross_mark: {new_sound.filename} ne semble pas correspondre (*samples.json* uniquement).")
+
+    @commands.command(aliases=['getindex'], brief="Commande pour mettre à jour l'index de la bibliothèque. Admin only.")
+    @is_admin()
+    @commands.dm_only()
+    async def get_index(self, ctx):
+        logging.info(f"Command get_index from {ctx.message.author.display_name}")
+        index_file = discord.File(fp="samples.json")
+        await ctx.send("Voilà l'index actuel tas d'cons.", file=index_file)
+
+
 
 
 
