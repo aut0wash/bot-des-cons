@@ -23,15 +23,15 @@ authorized_ids = [auto_id, kuaj_id, mob_id]
 token = TOKEN
 
 description = 'Soundboard des Cons'
-#intents = discord.Intents.default()
-#intents.members = True  # Subscribe to the privileged members intent.
-#client = commands.Bot(command_prefix='!', intents=intents, description=description)
+intents = discord.Intents.default()
+intents.members = True  # Subscribe to the privileged members intent.
+client = commands.Bot(command_prefix='!', intents=intents, description=description)
 
 
-client = commands.Bot(command_prefix='!', description=description)
+#client = commands.Bot(command_prefix='!', description=description)
 
-server_name = 'Le Discord des Cons'
-default_role = "Trou du cul la balayette"
+server_name = 'Le Think Tank'
+default_role = "Complotiste"
 
 
 def setup_logging():
@@ -77,7 +77,6 @@ async def on_ready():
         client.guild = client.get_guild(198534713575473152)
 
         client.samples = utils.load_json("samples.json")
-
         logging.info("Ready !")
     except Exception as e:
         logging.error('Error in on_ready: {}'.format(e))
