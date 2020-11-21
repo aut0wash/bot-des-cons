@@ -15,7 +15,7 @@ class Soundboard(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.folder_root = Path().absolute()
-        self.audio_folder = f"{Path().absolute()}/audios"
+        self.audio_folder = f"{Path().absolute()}\\audios"
         self.source_folder = f"{Path().absolute()}"
 
 
@@ -40,8 +40,8 @@ class Soundboard(commands.Cog):
             connected = member.voice
             if connected:
                 vc = await connected.channel.connect()
-                print(f"{self.audio_folder}/{sample.path}")
-                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
+                print(f"{self.audio_folder}\{sample.path}")
+                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}\\{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
 
                 while vc.is_playing():
                     await asyncio.sleep(0.5)
@@ -65,7 +65,7 @@ class Soundboard(commands.Cog):
             connected = member.voice
             if connected:
                 vc = await connected.channel.connect()
-                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
+                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}\\{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
 
                 while vc.is_playing():
                     await asyncio.sleep(0.5)
@@ -97,7 +97,7 @@ class Soundboard(commands.Cog):
         new_sound = ctx.message.attachments[0]
         extension = os.path.splitext(new_sound.filename)[1]
         if extension == ".mp3":
-            await new_sound.save(fp=f"{Path().absolute()}/audios/{new_sound.filename}")
+            await new_sound.save(fp=f"{Path().absolute()}\\audios\\{new_sound.filename}")
             await ctx.send(f":white_check_mark: Fichier {new_sound.filename} ajouté dans la bibliothèque avec succès.")
         else:
             await ctx.send(f":negative_squared_cross_mark: Fichier {new_sound.filename} ne semble pas être dans le bon format (.mp3 uniquement).")
@@ -110,7 +110,7 @@ class Soundboard(commands.Cog):
         new_samples_dict = ctx.message.attachments[0]
 
         if new_samples_dict.filename == "samples.json":
-            await new_samples_dict.save(fp=f"{Path().absolute()}/source/{new_samples_dict.filename}")
+            await new_samples_dict.save(fp=f"{Path().absolute()}\\{new_samples_dict.filename}")
             await ctx.send(f":white_check_mark: {new_samples_dict.filename} mis à jour avec succès!")
             self.client.samples = utils.load_json("samples.json")
 
