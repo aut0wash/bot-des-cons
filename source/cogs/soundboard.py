@@ -16,7 +16,7 @@ class Soundboard(commands.Cog):
         self.client = client
         self.folder_root = Path().absolute()
         self.audio_folder = f"{Path().absolute()}/audios"
-        self.source_folder f"{Path().absolute()}/source"
+        self.source_folder = f"{Path().absolute()}/source"
 
 
     @commands.command(aliases=['sound', 's'], brief="joue un record dans ton channel.", help="!sound <12> pour jouer le son n°12 !")
