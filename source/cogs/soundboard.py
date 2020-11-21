@@ -15,7 +15,7 @@ class Soundboard(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.folder_root = Path().absolute()
-        self.audio_folder = f"{Path().absolute()}\\audios"
+        self.audio_folder = f"{Path().absolute()}/audios"
         self.source_folder = f"{Path().absolute()}"
 
 
@@ -40,8 +40,8 @@ class Soundboard(commands.Cog):
             connected = member.voice
             if connected:
                 vc = await connected.channel.connect()
-                print(f"{self.audio_folder}\{sample.path}")
-                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}\\{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
+                print(f"{self.audio_folder}/{sample.path}")
+                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
 
                 while vc.is_playing():
                     await asyncio.sleep(0.5)
