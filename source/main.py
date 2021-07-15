@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands, tasks
+from discord.utils import get
+
 
 import asyncio
 import time
@@ -79,6 +81,8 @@ async def on_ready():
         client.samples = utils.load_json("samples.json")
         logging.info("Ready !")
         await client.change_presence(status=discord.Status.online, activity=discord.Game('!soundboard'))
+        client.aut0wash_DM_channel = client.get_user(154428278302703616)
+        await client.aut0wash_DM_channel.send("Hey je suis connecté !")
     except Exception as e:
         logging.error('Error in on_ready: {}'.format(e))
 
@@ -107,6 +111,7 @@ async def on_voice_state_update(member, before, after):
         pass
     except Exception as e:
         logging.error('Error in on_voice_state_update: {}'.format(e))
+
 
 if __name__ == "__main__":
     try:

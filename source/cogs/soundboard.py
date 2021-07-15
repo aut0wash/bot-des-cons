@@ -1,11 +1,15 @@
 import discord
 from discord.ext import commands, tasks
+from discord.utils import get
+
+
 import asyncio
 import logging
 import random
 from pathlib import Path
 import os.path
 import json
+import gtts
 
 import utils
 from main import is_admin
@@ -24,28 +28,31 @@ class Soundboard(commands.Cog):
     @commands.cooldown(3, 60, type=commands.BucketType.user)
     @commands.max_concurrency(1, per=commands.BucketType.guild, wait=True)
     async def soundboard(self, ctx, *sound_name):
-        self.client.samples = utils.load_json("samples.json")
-        sample_name = f"{' '.join(sound_name)}"
-        logging.info(f"Command soundboard from {ctx.message.author.display_name}: {sample_name}")
-        sample = None
         try:
-            val = int(sample_name)
-            sample = utils.get_sample_from_id(self.client.samples, val)
-        except ValueError:
-            sample = utils.get_sample_from_name(
-                self.client.samples, sample_name)
+            self.client.samples = utils.load_json("samples.json")
+            sample_name = f"{' '.join(sound_name)}"
+            logging.info(f"Command soundboard from {ctx.message.author.display_name}: {sample_name}")
+            sample = None
+            try:
+                val = int(sample_name)
+                sample = utils.get_sample_from_id(self.client.samples, val)
+            except ValueError:
+                sample = utils.get_sample_from_name(
+                    self.client.samples, sample_name)
 
-        if sample:
-            member = self.client.guild.get_member(ctx.message.author.id)
-            connected = member.voice
-            if connected:
-                vc = await connected.channel.connect()
-                print(f"{self.audio_folder}/{sample.path}")
-                vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
+            if sample:
+                member = self.client.guild.get_member(ctx.message.author.id)
+                connected = member.voice
+                if connected:
+                    vc = await connected.channel.connect()
+                    print(f"{self.audio_folder}/{sample.path}")
+                    vc.play(discord.FFmpegPCMAudio(f"{self.audio_folder}/{sample.path}", options=f"-vol {sample.volume}"), after=lambda e: logging.info(f"Finished, {e}"))
 
-                while vc.is_playing():
-                    await asyncio.sleep(0.5)
-                await vc.disconnect()
+                    while vc.is_playing():
+                        await asyncio.sleep(0.5)
+                    await vc.disconnect()
+        except Exception as e:
+            logging.info(f"Command soundboard from {ctx.message.author.display_name} run with error : {e}")
 
     @commands.command(aliases=['rd', 'rand'], brief="joue un son random dans ton channel.", help="!rand pour jouer un son random parmi la bibliothèque !")
     @commands.dm_only()
@@ -87,7 +94,19 @@ class Soundboard(commands.Cog):
             for sample in self.client.samples:
                 command_list.append(f"{sample}-{self.client.samples[sample]['path'].split('.')[0]}")
 
-        await ctx.send("Voici la liste des sons disponibles:\n```css\n{}```".format('\n'.join(command_list)))
+        #message ="Voici la liste des sons disponibles:\n```css\n{}\n```".format('\n'.join(command_list))
+
+
+        await ctx.send("Voici la liste des sons disponibles:")
+        msg = '```css\n'
+        for cmd in command_list:
+            if len(f"{msg}\n{cmd}") > 1900:
+                await ctx.send(f"{msg} \n```")
+                msg = msg = '```css\n'
+            msg = f"{msg}\n{cmd}"
+        await ctx.send(f"{msg} \n```")
+
+
 
     @commands.command(aliases=['add_sound', 'add'], brief="Commande pour ajouter un nouveau record dans la biblothèque! Admin only.")
     @is_admin()
@@ -135,6 +154,40 @@ class Soundboard(commands.Cog):
             if connection.guild.id == 198534713575473152:
                 await connection.disconnect()
 
+    @commands.command(aliases=['trad', 't'], brief="Text trad.")
+    @commands.dm_only()
+    @commands.cooldown(2, 60, type=commands.BucketType.user)
+    @commands.max_concurrency(1, per=commands.BucketType.guild, wait=True)
+    async def speak(self, ctx, phrase, language=None):
+        language_list = gtts.lang.tts_langs().keys()
+
+        role = get(self.client.guild.roles, id=388104536746622976)
+        member = self.client.guild.get_member(ctx.author.id)
+        if role not in member.roles:
+            await ctx.send("Tu n'as pas les permissions suffisantes pour utiliser cette fonction.")
+
+        if len(phrase)> 100:
+            await ctx.send(f':La phrase est trop longue (100 caractères) :\n*"{phrase[0:99]}"*.')
+        else:
+            if language is None:
+                language='fr'
+            else:
+                language = language.lower()
+
+            if language not in language_list :
+                language = "fr"
+            tts = gtts.gTTS(phrase, lang=language)
+            tts.save("temp/speak.mp3")
+
+            member = self.client.guild.get_member(ctx.message.author.id)
+            connected = member.voice
+            if connected:
+                vc = await connected.channel.connect()
+                vc.play(discord.FFmpegPCMAudio("temp/speak.mp3", options=f"-vol 256"), after=lambda e: logging.info(f"Finished, {e}"))
+
+                while vc.is_playing():
+                    await asyncio.sleep(0.5)
+                await vc.disconnect()
 
 
 def setup(client):

@@ -268,5 +268,300 @@
         "users": [198553764792238080],
         "volume": 150,
         "tags": ["bubz", "samuser", "dota"]
+    },
+    "46" : {
+        "path": "mobborane_1hp.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["apex", "1hp"]
+    },
+    "47" : {
+        "path": "marik_artifact_deck_vert.mp3",
+        "users": [198556491341496340],
+        "volume": 150,
+        "tags": ["marik", "didier", "artifact", "deck"]
+    },
+    "48" : {
+        "path": "marik_caresser_chatte.mp3",
+        "users": [198556491341496340],
+        "volume": 150,
+        "tags": ["marik", "caresser", "chatte"]
+    },
+    "49" : {
+        "path": "shifter_pro.mp3",
+        "users": [198556491341496340],
+        "volume": 150,
+        "tags": ["sch", "om", "velodrome"]
+    },
+    "50" : {
+        "path": "castagne.mp3",
+        "users": [198556491341496340],
+        "volume": 256,
+        "tags": ["lopezjo", "gitan", "moiteroute"]
+    },
+    "51" : {
+        "path": "bubZ.mp3",
+        "users": [198556491341496340],
+        "volume": 256,
+        "tags": ["bubz", "didier", "homer"]
+    },
+    "52" : {
+        "path": "edaic_ohe_matelot_vide.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["edaic", "matelot", "vide", "apex"]
+    },
+    "53" : {
+        "path": "conseil_scientifique.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["bigard", "conseil", "scientifique", "wesmart"]
+    },
+    "54" : {
+        "path": "aux_ordres_du_pognon.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["bigard", "ordre", "pognon", "wesmart"]
+    },
+
+    "55" : {
+        "path": "si_vif_si_fort.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["débat", "republique", "laicite", "elhairy"]
+    },
+
+    "56" : {
+        "path": "marseillaise.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["marseillaise", "débat", "vif", "fort"]
+    },
+
+    "57" : {
+        "path": "macron_explosion.mp3",
+        "users": [198682994565709824],
+        "volume": 150,
+        "tags": ["macron", "explosion", "gilet", "jaune"]
+    },
+
+    "58" : {
+        "path": "ceux_qui_ont_des_couilles.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["bigard", "couille", "débat", "wesmart"]
+    },
+
+    "59" : {
+        "path": "tous_les_scientifiques.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["bigard", "couille", "débat", "wesmart"]
+    },
+
+    "60" : {
+        "path": "tu_es_une_femme.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["bigard", "couille", "débat", "wesmart"]
+    },
+
+    "61" : {
+        "path": "last_one_down.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["lifeline", "last", "one", "down"]
+    },
+
+    "62" : {
+        "path": "arrete_je_jouie.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["bubz", "patrick", "jouie", "viol"]
+    },
+
+    "63" : {
+        "path": "oh_yeah.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["fargo", "oh", "yeah", "cohen"]
+    },
+
+    "64" : {
+        "path": "smud_important_amuser.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["smud", "bubz", "important", "amuser"]
+    },
+
+    "65" : {
+        "path": "who_is_bub.mp3",
+        "users": [198682994565709824],
+        "volume": 256,
+        "tags": ["queen", "nano", "bub", "who"]
+    },
+
+    "66" : {
+        "path": "mobborane_jouit.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["mob_borane", "robin", "jouit"]
+    },
+
+    "67" : {
+        "path": "nan_hanhan.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["marik", "nan", "hanhan"]
+    },
+
+    "68" : {
+        "path": "des_comms_sans_gueuler.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["marik", "bubz", "val"]
+    },
+
+    "69" : {
+        "path": "didier_trop_petit.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["didier", "rhum", "smol"]
+    },
+
+    "70" : {
+        "path": "tu_es_une_grosse_merde.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["castaner", "grosse", "merde"]
+    },
+
+    "71" : {
+        "path": "but_mob.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["momo", "mob", "but"]
+    },
+
+    "72" : {
+        "path": "soprano_au_goal.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["momo", "nul", "soprano"]
+    },
+
+    "73" : {
+        "path": "but_sylbou.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["but", "sylbou", "didi"]
+    },
+
+    "74" : {
+        "path": "bombe_atomique_afrique.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["but", "val", "bombe"]
+    },
+
+    "75" : {
+        "path": "witch_blade_bubz_cons.mp3",
+        "users": [198550235117649921],
+        "volume": 256,
+        "tags": ["bubz", "dota", "didier", "mob_borane", "witch_blade", "con"]
+    },
+    "76" : {
+        "path": "marik_bkb_pas_mal_item.mp3",
+        "users": [198556491341496340],
+        "volume": 256,
+        "tags": ["marik", "dota", "bkb", "item"]
+    },
+    "77" : {
+        "path": "mobborane_souris_tel_robinthomas.mp3",
+        "users": [198530702558494720],
+        "volume": 256,
+        "tags": ["mob_borane", "souris", "dota", "bubZ"]
+    },
+    "78" : {
+        "path": "didier_doggy.mp3",
+        "users": [198550235117649921],
+        "volume": 256,
+        "tags": ["didier", "dota", "solo", "doggy", "rage"]
+    },
+    "79" : {
+        "path": "didier_salope.mp3",
+        "users": [198550235117649921],
+        "volume": 256,
+        "tags": ["didier", "dota", "solo", "salope", "rage"]
+    },
+    "80" : {
+        "path": "rhum_yes_apex.mp3",
+        "users": [198719461283463168],
+        "volume": 256,
+        "tags": ["rhum_dota", "apex", "top1", "yes"]
+    },
+    "81" : {
+        "path": "rhum_souris.mp3",
+        "users": [198719461283463168],
+        "volume": 256,
+        "tags": ["rhum_dota", "souris", "taper"]
+    },
+
+    "82" : {
+        "path": "didier_testosterone.mp3",
+        "users": [198719461283463168],
+        "volume": 256,
+        "tags": ["didier", "grosse", "testo"]
+    },
+
+    "83" : {
+        "path": "Toutes_des_salopes.mp3",
+        "users": [198719461283463168],
+        "volume": 256,
+        "tags": ["toutes", "des", "salopes"]
+    },
+
+    "84" : {
+        "path": "marik_souffre.mp3",
+        "users": [198719461283463168],
+        "volume": 256,
+        "tags": ["marik", "souffre", "prout"]
+    },
+
+    "85" : {
+        "path": "moi_je_suis_communiste.mp3",
+        "users": [198719461283463168],
+        "volume": 256,
+        "tags": ["macron", "doute", "communiste"]
+    },
+    "86" : {
+        "path": "didier_fuck_big_girls.mp3",
+        "users": [198550235117649921],
+        "volume": 256,
+        "tags": ["didier", "fuck", "grosses", "fat"]
+    },
+    "87" : {
+        "path": "ostrane_moitie_moitie.mp3",
+        "users": [198849540353163264],
+        "volume": 256,
+        "tags": ["ostrane", "marik", "moitie", "fondue", "suisse"]
+    },
+    "88" : {
+        "path": "didier_auto_rire.mp3",
+        "users": [198550235117649921],
+        "volume": 256,
+        "tags": ["didier", "autowash", "rire"]
+    },
+    "89" : {
+        "path": "didier_bigard.mp3",
+        "users": [198550235117649921],
+        "volume": 256,
+        "tags": ["didier", "bigard", "blague"]
+    },
+    "90" : {
+        "path": "marik_ethylotest.mp3",
+        "users": [198556491341496340],
+        "volume": 256,
+        "tags": ["marik", "alcool", "ethylotest"]
     }
 }
